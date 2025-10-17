@@ -1,0 +1,58 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Recycled Water Volume by Supply Type (2013–2019)",
+  "width": "container",
+  "data": { "url": "data/recycled_water.csv" },
+  "transform": [
+    { "calculate": "toNumber(datum.year)", "as": "YearNum" },
+    { "calculate": "toNumber(datum.volume_ML)", "as": "Volume" },
+    { "filter": "isFinite(datum.YearNum) && isFinite(datum.Volume)" },
+    {
+      "calculate": "datum.recycledwater_supplytype === 'Onsite' || datum.recycledwater_supplytype === 'Supply to Southern Rural Water' ? datum.recycledwater_supplytype : 'Other supply types'",
+      "as": "Category"
+    }
+  ],
+  "layer": [
+    {
+      "mark": { "type": "line" },
+      "encoding": {
+        "x": {
+          "field": "YearNum",
+          "type": "quantitative",
+          "axis": { "format": "d", "title": "Year", "labelAngle": -45, "tickCount": 7 }
+        },
+        "y": { "field": "Volume", "type": "quantitative", "title": "Volume (ML)" },
+        "detail": { "field": "recycledwater_supplytype", "type": "nominal" },
+        "color": {
+          "field": "Category",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Other supply types", "Onsite", "Supply to Southern Rural Water"],
+            "range": ["#b0b0b0", "#377eb8", "#e41a1c"]
+          },
+          "legend": { "title": "Supply Type" }
+        }
+      }
+    },
+    {
+      "mark": { "type": "point", "filled": true },
+      "encoding": {
+        "x": { "field": "YearNum", "type": "quantitative" },
+        "y": { "field": "Volume", "type": "quantitative" },
+        "color": {
+          "field": "Category",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Other supply types", "Onsite", "Supply to Southern Rural Water"],
+            "range": ["#b0b0b0", "#377eb8", "#e41a1c"]
+          }
+        },
+        "tooltip": [
+          { "field": "recycledwater_supplytype", "type": "nominal", "title": "Supply Type" },
+          { "field": "YearNum", "type": "ordinal", "title": "Year" },
+          { "field": "Volume", "type": "quantitative", "title": "Volume (ML)", "format": "," }
+        ]
+      }
+    }
+  ]
+}

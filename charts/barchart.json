@@ -1,0 +1,76 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Annual Temperature Anomaly (difference from 1961-1990 average)",
+  "width": "container",
+  "data": { "url": "data/temp_change.csv" },
+  "transform": [
+    { "calculate": "toNumber(datum.Temperature)", "as": "TempNum" },
+    { "calculate": "toNumber(datum['11-year mean'])", "as": "Mean11" },
+    { "calculate": "toNumber(datum.Year)", "as": "YearNum" }
+  ],
+  "layer": [
+    {
+      "transform": [
+        { "filter": "isFinite(datum.TempNum)" },
+        { "calculate": "datum.TempNum >= 0 ? 'Higher than average temp' : 'Lower than average temp'", "as": "series" }
+      ],
+      "mark": { "type": "bar" },
+      "encoding": {
+        "x": {
+          "field": "YearNum",
+          "type": "quantitative",
+          "axis": {
+            "format": "d",
+            "title": "Year",
+            "tickCount": 12,
+            "tickMinStep": 10
+          },
+          "scale": { "domain": [1910, 2020] }
+        },
+        "y": {
+          "field": "TempNum",
+          "type": "quantitative",
+          "title": "Temperature (°C)"
+        },
+        "color": {
+          "field": "series",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Higher than average temp", "Lower than average temp"],
+            "range": ["#e41a1c", "#377eb8", "#000000"]
+          },
+          "title": "Legend"
+        },
+        "tooltip": [
+          { "field": "Year", "type": "nominal" },
+          { "field": "TempNum", "type": "quantitative", "title": "Temperature (°C)", "format": ".2f" }
+        ]
+      }
+    },
+
+    {
+      "transform": [
+        { "filter": "isFinite(datum.Mean11)" },
+        { "calculate": "'11-year mean'", "as": "series" }
+      ],
+      "mark": { "type": "line", "strokeWidth": 2 },
+      "encoding": {
+        "x": {
+          "field": "YearNum",
+          "type": "quantitative",
+          "scale": { "domain": [1910, 2020] }
+        },
+        "y": { "field": "Mean11", "type": "quantitative" },
+        "color": {
+          "field": "series",
+          "type": "nominal",
+          "scale": {
+            "domain": ["11-year mean"]
+          },
+          "title": "Legend"
+        }
+      }
+    }
+
+  ]
+}
