@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Climate Australia</title>
+  <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+
+  <!-- Import pure.css -->
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css"
+    integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Google font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+  <!-- CSS file -->
+  <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
+
+
+</head>
+
+<body>
+
+  <div class="page">
+
+    <!-- pure grid group -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <h1>
+      Australian Climate Report
+      <span class="subtext">A look into Australian climate, and its path to sustainability</span>
+        </h1>
+
+      </div>
+    </div>
+    <!-- end pure grid group -->
+
+    
+
+    <!-- pure grid group -->
+    <div class="pure-g">
+
+      <!-- Text on the left -->
+      <div class="pure-u-1-3">
+        <div class="description description-left">
+          <div style="
+            background-color: #f2f2f2;
+            color: #333;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            padding: 12px 16px;
+            border-radius: 6px;
+            max-width: 350px;   /* set a real width instead of 'container' */
+            margin: 0 auto;     /* centers the box if narrower than column */
+          ">
+              <p>Australia’s climate is diverse and highly seasonal.</p>
+              <ul>
+                <li>Summer (Dec–Feb): Most regions experience hot, dry conditions.</li>
+                <li>Winter (Jun–Aug): Southern regions like VIC and NSW get cooler. Northern Territory temperatures peak.</li>
+                <li>Explore the map by month orstate/territory to see how the climate varies!</li>
+              </ul>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Visualisation on the right -->
+      <div class="pure-u-2-3">
+        <div id="vis1-AU_map" class="vis-container"></div>
+      </div>
+
+    </div>
+    <!-- end pure grid group -->
+
+
+
+
+    <!-- pure grid group -->
+    <div class="pure-g">
+      <div class="pure-u-1-2">
+        <div class="description description-left">
+          <h2>Climate and Tourists</h2>
+          <p>
+            QLD and WA are among Australia’s hottest states. In the plot below, QLD shows the greatest rainfall variability, and tourism peaks in December for holiday season (when rainfall is moderate).</p>
+        </div>
+      </div>
+      <div class="pure-u-1-2">
+        <div id="vis4_lollipopChart" class="vis-container"></div>
+      </div>
+    </div>
+    <!-- end pure grid group -->
+
+
+    <!-- end pure grid group -->
+
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <div id="vis2-bubbleChart" class="vis-container"></div>
+      </div>
+    </div>
+    <!-- end pure grid group -->
+
+
+
+
+    <!-- pure grid group -->
+    <div class="pure-g">
+      <div class="pure-u-1-1" style="text-align: center;">
+        <h3>A CHANGING CLIMATE</h3>
+      </div>
+    </div>
+    <!-- end pure grid group -->
+
+  <!-- pure grid group -->
+  <div class="pure-g">
+    <!-- Text on the left -->
+    <div class="pure-u-1-3">
+      <div class="description description-left">
+        <h2>Global Warming</h2>
+        <p>Australia’s climate is becoming warmer, with almost every year since 1990 recording higher temperatures than the 1961–1990 average. Without any intervention, this trend is likely to continue growing to new records.</p>
+      </div>
+    </div>
+    
+    <div class="pure-u-2-3">
+      <div id="vis5_barchart" class="vis-container"></div>
+    </div>
+  </div>
+  <!-- end pure grid group -->
+
+
+    <!-- pure grid group -->
+    <div class="pure-g">
+      <div class="pure-u-2-3">
+        <div id="vis6_barbell" class="vis-container"></div>
+      </div>
+      <div class="pure-u-1-3">
+        <div class="description description-right">
+          <h2>Consequences</h2>
+          <p>As a result, heat-related deaths are projected to rise, particularly in rural areas, with heat toll in Perth expected to triple, and Melbourne to at least double by 2050.</p>
+        </div>
+      </div>
+
+    </div>
+    <!-- end pure grid group -->
+
+
+
+
+
+    <!-- pure grid group -->
+    <div class="pure-g">
+      <div class="pure-u-1-1" style="text-align: center;">
+        <h3>TOWARDS A COOLER FUTURE</h3>
+      </div>
+    </div>
+    <!-- end pure grid group -->
+
+
+    <!-- pure grid group -->
+    <div class="pure-g">
+      <div class="pure-u-2-3">
+        <div id="vis3-choropleth_map" class="vis-container"></div>
+      </div>
+      <div class="pure-u-1-3">
+        <div class="description description-right">
+          <h2>Rainfall in VIC</h2>
+          <p>Water plays a vital role in reducing heat-related deaths. Rainfall patterns in Victoria highlight why rural areas are most at risk, as limited medical services and low rainfall contribute to higher temperatures and vulnerability.</p>
+        </div>
+      </div>
+
+    </div>
+    <!-- end pure grid group -->
+
+
+
+    <!-- pure grid group -->
+    <div class="pure-g">
+      <!-- Text on the left -->
+      <div class="pure-u-1-3">
+        <div class="description description-left">
+          <h2>Recycling Water</h2>
+          <p>To address this, Melbourne Water has expanded water recycling initiatives, increasing the supply of recycled water both onsite and to southern rural Victoria since 2013. Other Supply Types like to City West or Infrastructure Groups have largely remained the same. </p>
+        </div>
+      </div>
+      
+      <div class="pure-u-2-3">
+        <div id="vis7_multiLine" class="vis-container"></div>
+      </div>
+    </div>
+    <!-- end pure grid group -->
+
+
+
+
+
+
+    <!-- Footer -->
+
+    <div class="pure-g">
+      <div class="pure-u-1-1 small-font">
+        <p>Designed by: <a href="https://github.com/jlia0071-v2/FIT3179-Week9-HW" target="_blank">James Liang</a>. 
+          The data source is Data.gov.au 
+            <a href="https://data.gov.au/data/dataset/2021-soe-climate-annual-mean-temperature-anomaly-australia-1910-to-2020" target=" _blank">(1)</href>.
+              <a href="https://data.gov.au/data/dataset/soe-2021-urban-027" target=" _blank"> (2)</href>.
+                <a href="https://data.gov.au/data/dataset/recycled-water-annual-volumes-supplied-by-melbourne-water" target=" _blank"> (3)</href>,
+            
+          <a href="https://www.kaggle.com/datasets/nadzmiagthomas/australia-weather-data-2000-2024/data?select=SuburbClustered.csv" target=" _blank"> Australia Weather Data</href>,
+            
+          <a href="https://www.tra.gov.au/en/international/international-monthly-snapshot" target=" _blank"> Tourism Research Australia </href>
+                
+          </p>
+          
+      </div>
+    </div>
+
+
+  </div> <!-- end page -->
+
+  <script type="text/javascript">
+    var specVis1 = "charts/symbol_map.vg.json";
+    var specVis2 = "charts/bubbleChart.json";
+    var specVis3 = "charts/choropleth_map.json";
+    var specVis4 = "charts/lollipop_chart.json";
+    var specVis5 = "charts/barchart.json";
+    var specVis6 = "charts/barbell.json";
+    var specVis7 = "charts/multiLine_chart.json";
+
+    vegaEmbed('#vis1-AU_map', specVis1, { "actions": false });
+
+    vegaEmbed('#vis2-bubbleChart', specVis2, { "actions": false }).then(function (result) {
+    }).catch(console.error);
+
+    vegaEmbed('#vis3-choropleth_map', specVis3, { "actions": false }).then(function (result) {
+    }).catch(console.error);
+
+    vegaEmbed('#vis4_lollipopChart', specVis4, { "actions": false }).then(function (result) {
+    }).catch(console.error);
+
+    vegaEmbed('#vis5_barchart', specVis5, { "actions": false }).then(function (result) {
+    }).catch(console.error);
+
+    vegaEmbed('#vis6_barbell', specVis6, { "actions": false }).then(function (result) {
+    }).catch(console.error);
+
+    vegaEmbed('#vis7_multiLine', specVis7, { "actions": false }).then(function (result) {
+    }).catch(console.error);
+
+    //vegaEmbed('#vis3', specVis1, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    //}).catch(console.error);
+
+    //vegaEmbed('#vis4', specVis2, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    //}).catch(console.error);
+  </script>
+</body>
+
+</html>
